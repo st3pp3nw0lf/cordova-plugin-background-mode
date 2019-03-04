@@ -125,6 +125,7 @@ public class ForegroundService extends Service {
     @SuppressLint("WakelockTimeout")
     private void keepAwake()
     {
+     /*
         JSONObject settings = BackgroundMode.getSettings();
         boolean isSilent    = settings.optBoolean("silent", false);
 
@@ -137,6 +138,24 @@ public class ForegroundService extends Service {
         wakeLock = pm.newWakeLock(
                 PARTIAL_WAKE_LOCK, "backgroundmode:wakelock");
 
+        wakeLock.acquire();
+        */
+        JSONObject settings = BackgroundMode.getSettings();
+        boolean isSilent    = settings.optBoolean("silent", false);
+        if (!isSilent) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                NotificationManager nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+                nm.createNotificationChannel(new NotificationChannel(NOTIFICATION_CHANNEL_ID_SERVICE, "App Service", NotificationManager.IMPORTANCE_DEFAULT));
+                nm.createNotificationChannel(new NotificationChannel(NOTIFICATION_CHANNEL_ID_INFO, "Download Info", NotificationManager.IMPORTANCE_DEFAULT));
+            } else {
+                startForeground(NOTIFICATION_ID, makeNotification());
+            }
+        }
+
+        PowerManager powerMgr = (PowerManager)
+                getSystemService(POWER_SERVICE);
+        wakeLock = powerMgr.newWakeLock(
+                PowerManager.PARTIAL_WAKE_LOCK, "BackgroundMode");
         wakeLock.acquire();
     }
 
