@@ -165,6 +165,7 @@ public class BackgroundModeExt extends CordovaPlugin {
             public void run() {
                 try {
                     Thread.sleep(1000);
+                 /*
                     getApp().runOnUiThread(() -> {
                         View view = webView.getEngine().getView();
 
@@ -174,6 +175,21 @@ public class BackgroundModeExt extends CordovaPlugin {
                                  .invoke(view);
                         } catch (Exception e){
                             view.dispatchWindowVisibilityChanged(View.VISIBLE);
+                        }
+                    });
+                    */
+                    getApp().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                        View view = webView.getEngine().getView();
+
+                        try {
+                            Class.forName("org.crosswalk.engine.XWalkCordovaView")
+                                 .getMethod("onShow")
+                                 .invoke(view);
+                        } catch (Exception e){
+                            view.dispatchWindowVisibilityChanged(View.VISIBLE);
+                        }
                         }
                     });
                 } catch (InterruptedException e) {
