@@ -165,7 +165,7 @@ public class BackgroundModeExt extends CordovaPlugin {
             public void run() {
                 try {
                     Thread.sleep(1000);
-                 /*
+                 
                     getApp().runOnUiThread(() -> {
                         View view = webView.getEngine().getView();
 
@@ -177,7 +177,8 @@ public class BackgroundModeExt extends CordovaPlugin {
                             view.dispatchWindowVisibilityChanged(View.VISIBLE);
                         }
                     });
-                    */
+                    
+                 /*
                     getApp().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
@@ -192,6 +193,7 @@ public class BackgroundModeExt extends CordovaPlugin {
                         }
                         }
                     });
+                    */
                 } catch (InterruptedException e) {
                     // do nothing
                 }
