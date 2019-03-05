@@ -177,23 +177,20 @@ public class BackgroundModeExt extends CordovaPlugin {
                             view.dispatchWindowVisibilityChanged(View.VISIBLE);
                         }
                     });
-                    
-                 /*
-                    getApp().runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                        View view = webView.getEngine().getView();
+                    // getApp().runOnUiThread(new Runnable() {
+                    //     @Override
+                    //     public void run() {
+                    //     View view = webView.getEngine().getView();
 
-                        try {
-                            Class.forName("org.crosswalk.engine.XWalkCordovaView")
-                                 .getMethod("onShow")
-                                 .invoke(view);
-                        } catch (Exception e){
-                            view.dispatchWindowVisibilityChanged(View.VISIBLE);
-                        }
-                        }
-                    });
-                    */
+                    //     try {
+                    //         Class.forName("org.crosswalk.engine.XWalkCordovaView")
+                    //              .getMethod("onShow")
+                    //              .invoke(view);
+                    //     } catch (Exception e){
+                    //         view.dispatchWindowVisibilityChanged(View.VISIBLE);
+                    //     }
+                    //     }
+                    // });
                 } catch (InterruptedException e) {
                     // do nothing
                 }
@@ -273,14 +270,13 @@ public class BackgroundModeExt extends CordovaPlugin {
                 }
 
                 activity.runOnUiThread(dialog::show);
-             /*
-                activity.runOnUiThread(new Runnable() {
-           @Override
-           public void run() {
-               dialog.show();
-           }
-       });
-*/
+             
+                // activity.runOnUiThread(new Runnable() {
+                //     @Override
+                //     public void run() {
+                //         dialog.show();
+                //     }
+                // });
                 break;
             }
         }
